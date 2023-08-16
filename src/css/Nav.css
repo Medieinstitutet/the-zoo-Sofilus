@@ -1,0 +1,17 @@
+.nav-container{
+    width: 20vw;
+    height: 200px;
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.nav-option-home{
+    font-size: 2rem;
+}
+
+.nav-option-home:hover{
+    border: gold solid 2px;
+    padding: 1rem;
+}

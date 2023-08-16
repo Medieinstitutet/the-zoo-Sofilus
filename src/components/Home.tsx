@@ -1,3 +1,5 @@
+import { Header } from "./Header"
+
 export const Home = () => {
-    return (<p>Hej</p>)
+    return (<Header></Header>)
 }

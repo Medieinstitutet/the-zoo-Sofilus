@@ -1,0 +1,17 @@
+/*#root {}*/
+
+.header-container{
+  width: 100vw;
+  height: 200px;
+  background-color: rgb(120, 169, 120);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.headline{
+  font-size: 3rem;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-style: italic;
+}
+
