@@ -1,5 +1,5 @@
 import { Nav } from "./Nav"
-import { GetAnimals } from "./GetAnimals"
+import { ShowAnimals } from "./ShowAnimals"
 
 export const Header = () => {
     return (
@@ -7,7 +7,7 @@ export const Header = () => {
             <div className="header-container">
                 <h1 className="headline">Vårt lyckliga zoo</h1>
                 <Nav></Nav>
-                <GetAnimals></GetAnimals>
+                <ShowAnimals></ShowAnimals>
             </div>
         </>
     )
