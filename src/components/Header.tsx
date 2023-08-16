@@ -1,8 +1,8 @@
 export const Header = () => {
     return (
         <>
-            <div>
-                <h1>Zoo</h1>
+            <div className="header-container">
+                <h1 className="headline">Zoo</h1>
             </div>
         </>
     )
