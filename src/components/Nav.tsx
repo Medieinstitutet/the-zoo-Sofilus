@@ -1,4 +1,12 @@
 
 export const Nav = () => {
-    return (<p>Test</p>)
+    return (
+        <>
+            <div>
+                <ul>
+                    <li>Hem</li>
+                </ul>
+            </div>
+        </>
+    )
 }
