@@ -2,9 +2,9 @@
 export const Nav = () => {
     return (
         <>
-            <div>
-                <ul>
-                    <li>Hem</li>
+            <div >
+                <ul className="nav-container">
+                    <li className="nav-option-home">Hem</li>
                 </ul>
             </div>
         </>
