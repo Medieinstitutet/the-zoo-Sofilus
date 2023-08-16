@@ -1,3 +1,9 @@
 export const Header = () => {
-    return (<p>Hej</p>)
+    return (
+        <>
+            <div>
+                <h1>Zoo</h1>
+            </div>
+        </>
+    )
 }
