@@ -20,15 +20,15 @@ export const ShowAnimals = () => {
         }
     })
 
-    const animal: JSX.Element[] = animalList.map((animal)=> {return <div> 
-                <img src={animal.imageUrl} />
-                <p>{animal.name}</p>
-                <p>{animal.shortDescription}</p>
+    const animal: JSX.Element[] = animalList.map((animal)=> {return <div className="animal-card-container"> 
+                <img src={animal.imageUrl} className="animal-card-img"/>
+                <p className="animal-card-name">{animal.name}</p>
+                <p className="animal-card-description">{animal.shortDescription}</p>
             </div>}) 
 
     return (
         <>
-            <div>{animal}</div>
+            <div className="animal-cards-container">{animal}</div>
         </>
     )
 }
