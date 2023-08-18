@@ -4,7 +4,7 @@ import { PickedAnimal } from "./components/PickedAnimal";
 
 export const router = createBrowserRouter([
     {
-        path:"/",
+        path:"/:id",
         element: <Home></Home>
     },
     {
