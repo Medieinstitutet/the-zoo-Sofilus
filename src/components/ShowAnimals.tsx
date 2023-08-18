@@ -10,7 +10,7 @@ export const ShowAnimals = () => {
         // Checkes if data allready existing in localstorage
        const storedAnimalList = localStorage.getItem('AnimalList')!
 
-        if(animalList){
+        if(storedAnimalList){
             const parsedAnimalList: IAnimal[] = JSON.parse(storedAnimalList)
             setAnimalList(parsedAnimalList)
             console.log(parsedAnimalList)
@@ -18,17 +18,22 @@ export const ShowAnimals = () => {
             console.log('inga djur')
            GetAnimals(); 
         }
-    })
+    },[])
 
-    const animal: JSX.Element[] = animalList.map((animal)=> {return <div className="animal-card-container"> 
-                <img src={animal.imageUrl} className="animal-card-img"/>
-                <p className="animal-card-name">{animal.name}</p>
-                <p className="animal-card-description">{animal.shortDescription}</p>
-            </div>}) 
+    const goToAnimal = () => {
+        console.log('test')
+    }
+    const animalElements: JSX.Element[] = animalList.map((animal) => (
+        <div id={animal.id.toString()} key={animal.id} onClick={goToAnimal} className="animal-card-container">
+          <img src={animal.imageUrl} className="animal-card-img" alt={animal.name} />
+          <p className="animal-card-name">{animal.name}</p>
+          <p className="animal-card-description">{animal.shortDescription}</p>
+        </div>
+      ));
 
     return (
         <>
-            <div className="animal-cards-container">{animal}</div>
+            <div className="animal-cards-container">{animalElements}</div>
         </>
     )
 }
