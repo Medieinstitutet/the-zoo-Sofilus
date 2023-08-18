@@ -4,11 +4,11 @@ import { PickedAnimal } from "./components/PickedAnimal";
 
 export const router = createBrowserRouter([
     {
-        path:"/:id",
+        path:"/",
         element: <Home></Home>
     },
     {
-        path:"/1",
+        path:"/:id",
         element: <PickedAnimal></PickedAnimal>
     }
 
