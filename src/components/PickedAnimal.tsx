@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { IAnimal } from "../models/IAnimal";
 import { GetAnimals } from "./GetAnimals";
+import { useParams } from "react-router-dom";
 
 export const PrintPickedAnimal = () => {
     const [animalList, setAnimalList] = useState<IAnimal[]>([]);
@@ -20,9 +21,11 @@ export const PrintPickedAnimal = () => {
     },[])
 
 
-        let url = new URL(window.location.href)
-        let urlSegments = url.pathname.split("/");
-        let id = urlSegments.pop();
+    const { id } = useParams<{ id: string }>();
+
+    const foundAnimal = animalList.find((animal) => animal.id.toString() === id);
+    console.log(foundAnimal)
+        
         
     
 
