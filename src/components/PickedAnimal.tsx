@@ -20,6 +20,13 @@ export const PrintPickedAnimal = () => {
     },[])
 
 
+        let url = new URL(window.location.href)
+        let urlSegments = url.pathname.split("/");
+        let id = urlSegments.pop();
+        
+    
+
+
     return (
         <>test
         </>
