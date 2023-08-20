@@ -1,0 +1,35 @@
+.picked-animal-page{
+    background-color: green;
+}
+
+
+.picked-animal-container{
+    margin: 0 auto;
+    width: 800px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.picked-animal-name{
+    font-size: 5rem;
+}
+
+.picked-animal-img{
+    width: 300px;
+}
+
+.picked-animal-description{
+    width: 500px;
+}
+
+.picked-animal-last-fed{
+    font-size: 2rem;
+}
+
+.picked-animal-feed-btn{
+    width: 100px;
+    height: 50px;
+    margin-bottom: 20px;
+}
