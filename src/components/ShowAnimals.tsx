@@ -1,7 +1,7 @@
 import { GetAnimalsFromLocalstorage } from "./GetAnimalFromLocalstorage"
 
 
-export const ShowAnimals = () => {
+export const PrintAnimals = () => {
 
     const animalList = GetAnimalsFromLocalstorage()
 

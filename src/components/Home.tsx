@@ -1,11 +1,11 @@
 import { Header } from "./Header"
-import { ShowAnimals } from "./ShowAnimals"
+import { PrintAnimals } from "./ShowAnimals"
 
 export const Home = () => {
     return (
         <>
             <Header></Header>
-            <ShowAnimals></ShowAnimals>
+            <PrintAnimals></PrintAnimals>
         </>
     
     )
