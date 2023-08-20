@@ -7,13 +7,13 @@ export const PrintPickedAnimal = () => {
     let htmlElements: JSX.Element | null = null;
     if (foundAnimal) {
       htmlElements = (
-        <div key={foundAnimal.id}>
-            <h1>{foundAnimal.name}</h1>
-            <img src={foundAnimal.imageUrl} alt={foundAnimal.name}/>
-            <p>Födelseår: {foundAnimal.yearOfBirth}</p>
-            <p>{foundAnimal.longDescription}</p>
-            <p>Matades senast: {foundAnimal.lastFed}</p>
-            <button>Mata {foundAnimal.name}</button>
+        <div key={foundAnimal.id} className="picked-animal-container">
+            <h1 className="picked-animal-name">{foundAnimal.name}</h1>
+            <img src={foundAnimal.imageUrl} alt={foundAnimal.name} className="picked-animal-img"/>
+            <p className="picked-animal-year-of-birth">Födelseår: {foundAnimal.yearOfBirth}</p>
+            <p className="picked-animal-description">{foundAnimal.longDescription}</p>
+            <p className="picked-animal-last-fed">Matades senast: {foundAnimal.lastFed}</p>
+            <button className="picked-animal-feed-btn">Mata {foundAnimal.name}</button>
         </div>
       );
     } else {
@@ -24,7 +24,7 @@ export const PrintPickedAnimal = () => {
 
     return (
         <>
-           <div>{htmlElements}</div>
+           <div className="picked-animal-page">{htmlElements}</div>
         </>
     
     )
