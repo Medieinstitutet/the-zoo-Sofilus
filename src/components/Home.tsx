@@ -1,5 +1,5 @@
 import { Header } from "./Header"
-import { PrintAnimals } from "./ShowAnimals"
+import { PrintAnimals } from "./PrintAnimals"
 
 export const Home = () => {
     return (

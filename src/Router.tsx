@@ -1,6 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import { Home } from "./components/Home";
-import { PrintPickedAnimal } from "./components/PickedAnimal";
+import { PrintPickedAnimal } from "./components/PrintPickedAnimal";
 
 export const router = createBrowserRouter([
     {
