@@ -1,24 +1,9 @@
-import { useEffect, useState } from "react"
-import { IAnimal } from "../models/IAnimal"
-import { GetAnimals } from "./GetAnimals"
+import { GetAnimalsFromLocalstorage } from "./GetAnimalFromLocalstorage"
+
 
 export const ShowAnimals = () => {
 
-    const [animalList, setAnimalList] = useState<IAnimal[]>([]);
-
-    useEffect(() => {
-        // Checkes if data allready existing in localstorage
-       const storedAnimalList = localStorage.getItem('AnimalList')!
-
-        if(storedAnimalList){
-            const parsedAnimalList: IAnimal[] = JSON.parse(storedAnimalList)
-            setAnimalList(parsedAnimalList)
-            console.log(parsedAnimalList)
-        }else{
-            console.log('inga djur')
-           GetAnimals(); 
-        }
-    },[])
+    const animalList = GetAnimalsFromLocalstorage()
 
     const goToAnimal = (e: React.MouseEvent) => {
         let id = (e.currentTarget as HTMLButtonElement).id
