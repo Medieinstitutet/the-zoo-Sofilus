@@ -2,6 +2,11 @@ import { GetPickedAnimal } from "./GetPickedAnimal";
 
 export const PrintPickedAnimal = () => {
 
+    const feedAnimal = () => {
+      console.log('test')
+    }
+  
+
     let foundAnimal = GetPickedAnimal();
 
     let htmlElements: JSX.Element | null = null;
@@ -13,7 +18,7 @@ export const PrintPickedAnimal = () => {
             <p className="picked-animal-year-of-birth">Födelseår: {foundAnimal.yearOfBirth}</p>
             <p className="picked-animal-description">{foundAnimal.longDescription}</p>
             <p className="picked-animal-last-fed">Matades senast: {foundAnimal.lastFed}</p>
-            <button className="picked-animal-feed-btn">Mata {foundAnimal.name}</button>
+            <button className="picked-animal-feed-btn" onClick={feedAnimal}>Mata {foundAnimal.name}</button>
         </div>
       );
     } else {
