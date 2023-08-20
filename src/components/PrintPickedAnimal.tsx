@@ -1,12 +1,8 @@
-import { useParams } from "react-router-dom";
-import { GetAnimalsFromLocalstorage } from "./GetAnimalFromLocalstorage";
+import { GetPickedAnimal } from "./GetPickedAnimal";
 
 export const PrintPickedAnimal = () => {
-   const animalList = GetAnimalsFromLocalstorage();
 
-    const { id } = useParams<{ id: string }>();
-    const foundAnimal = animalList.find((animal) => animal.id.toString() === id);
-    console.log(foundAnimal)
+    let foundAnimal = GetPickedAnimal();
 
     let htmlElements: JSX.Element | null = null;
     if (foundAnimal) {
