@@ -19,9 +19,7 @@ export const PrintPickedAnimal = () => {
     } else {
       htmlElements = <p>Djuret kunde inte hittas</p>;
     }
-
-    // jag ska bara skriva ut rätt html
-
+    
     return (
         <>
            <div className="picked-animal-page">{htmlElements}</div>
