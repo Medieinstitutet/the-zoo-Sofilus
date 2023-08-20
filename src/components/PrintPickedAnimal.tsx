@@ -9,9 +9,9 @@ export const PrintPickedAnimal = () => {
       htmlElements = (
         <div key={foundAnimal.id}>
             <h1>{foundAnimal.name}</h1>
-            <img src={foundAnimal.imageUrl} className="animal-card-img" alt={foundAnimal.name}/>
+            <img src={foundAnimal.imageUrl} alt={foundAnimal.name}/>
             <p>Födelseår: {foundAnimal.yearOfBirth}</p>
-            <p className="animal-card-description">{foundAnimal.longDescription}</p>
+            <p>{foundAnimal.longDescription}</p>
             <p>Matades senast: {foundAnimal.lastFed}</p>
             <button>Mata {foundAnimal.name}</button>
         </div>
