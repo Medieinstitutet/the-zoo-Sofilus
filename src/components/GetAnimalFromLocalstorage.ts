@@ -4,27 +4,20 @@ import { IAnimal } from "../models/IAnimal";
 import { GetAnimals } from "./GetAnimals";
 
 
-export const GetAnimalsFromLocalstorage = () => {
+export const GetAnimalsFromLocalstorage = async () => {
 
-    const [animalList, setAnimalList] = useState<IAnimal[]>([]);
+    let animalList: IAnimal[] =[]
 
-    const fetchData = async () => {
- await GetAnimals();
-   const storedAnimalList = localStorage.getItem('AnimalList')!
+    await GetAnimals();
+    const storedAnimalList = localStorage.getItem('AnimalList')!
 
-    if(storedAnimalList){
-        const parsedAnimalList: IAnimal[] = JSON.parse(storedAnimalList)
-        setAnimalList(parsedAnimalList)
-        console.log(parsedAnimalList)
-    }else{
-        console.log('inga djur')
-       GetAnimals(); 
-    }
-    }
-
-    useEffect(() => {
-        fetchData();
-    },[]) 
+        if(storedAnimalList){
+            animalList = JSON.parse(storedAnimalList)
+            
+        }else{
+            console.log('inga djur')
+        GetAnimals(); 
+        }
 
 return animalList
 }

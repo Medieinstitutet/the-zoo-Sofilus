@@ -1,9 +1,24 @@
 import { GetAnimalsFromLocalstorage } from "./GetAnimalFromLocalstorage"
+import { useState, useEffect } from "react";
+import { IAnimal } from "../models/IAnimal";
+
 
 
 export const PrintAnimals = () => {
 
-    const animalList = GetAnimalsFromLocalstorage()
+    const [animalList, setAnimalList] = useState<IAnimal[]>([]);
+  
+  const fetchedData = async () =>{
+  const animalListLocal = await GetAnimalsFromLocalstorage() 
+    if(animalListLocal){
+      setAnimalList(animalListLocal)
+    }  
+  }
+  
+  useEffect(() => {
+    fetchedData();
+  },[]) 
+
 
     const goToAnimal = (e: React.MouseEvent) => {
         let id = (e.currentTarget as HTMLButtonElement).id
