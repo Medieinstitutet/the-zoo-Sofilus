@@ -1,5 +1,4 @@
 
-import { useEffect, useState } from "react"
 import { IAnimal } from "../models/IAnimal";
 import { GetAnimals } from "./GetAnimals";
 
