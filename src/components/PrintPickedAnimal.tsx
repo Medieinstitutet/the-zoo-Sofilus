@@ -4,6 +4,7 @@ import { IAnimal } from "../models/IAnimal";
 import { useEffect } from "react";
 import { GetAnimalsFromLocalstorage } from "./GetAnimalFromLocalstorage";
 import { GetCurrentTime } from "./GetTimeToLastFed";
+import { ReformLastFedTimeFromApi } from "./reformLastFedTimeFromApi";
 
 export const PrintPickedAnimal = () => {
   
@@ -37,14 +38,8 @@ export const PrintPickedAnimal = () => {
       localStorage.setItem('AnimalList', JSON.stringify(updatedAnimalList));
   }
 
-  let foundAnimal = GetPickedAnimal();
-
-  const lastFedTime = foundAnimal?.lastFed;
-  let formattedTime = "";
-  if (lastFedTime) {
-    const dateObject = new Date(lastFedTime);
-    formattedTime = dateObject.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
-  }
+  let foundAnimal = GetPickedAnimal()
+  let formattedTime = ReformLastFedTimeFromApi();
 
   let htmlElements: JSX.Element | null = null;
   if (foundAnimal) {
