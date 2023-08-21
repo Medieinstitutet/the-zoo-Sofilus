@@ -21,6 +21,7 @@ export const PrintPickedAnimal = () => {
         }
     },[]) 
 
+ 
     const [newFeedTime, setNewFeedTime] = useState<string>('');
 
     const handleFeedAnimal = (e: React.MouseEvent) => {
@@ -46,6 +47,13 @@ export const PrintPickedAnimal = () => {
 
     let foundAnimal = GetPickedAnimal();
 
+    const lastFedTime = foundAnimal?.lastFed;
+    let formattedTime = "";
+    if (lastFedTime) {
+      const dateObject = new Date(lastFedTime);
+      formattedTime = dateObject.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+    }
+
     let htmlElements: JSX.Element | null = null;
     if (foundAnimal) {
       htmlElements = (
@@ -54,7 +62,7 @@ export const PrintPickedAnimal = () => {
             <img src={foundAnimal.imageUrl} alt={foundAnimal.name} className="picked-animal-img"/>
             <p className="picked-animal-year-of-birth">Födelseår: {foundAnimal.yearOfBirth}</p>
             <p className="picked-animal-description">{foundAnimal.longDescription}</p>
-            <p className="picked-animal-last-fed"> Matades senast: {newFeedTime || foundAnimal.lastFed}</p>
+            <p className="picked-animal-last-fed"> Matades senast: {newFeedTime || formattedTime }</p>
             <button className="picked-animal-feed-btn" onClick={handleFeedAnimal} id={foundAnimal.id.toString()}>Mata {foundAnimal.name}</button>
         </div>
       );
