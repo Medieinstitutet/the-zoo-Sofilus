@@ -27,28 +27,17 @@ export const PrintPickedAnimal = () => {
   const handleFeedAnimal = (e: React.MouseEvent) => {
       let currentTime = GetCurrentTime()
       setNewFeedTime(currentTime);
+      setNewIsFed(true)
 
-      const updatedAnimalListLastFed = animalList.map((animal) => {
+      const updatedAnimalListFeed = animalList.map((animal) => {
           if (animal.id.toString() === e.currentTarget.id) {
-              return { ...animal, lastFed: currentTime };
+              return { ...animal, lastFed: currentTime, isFed: newIsFed };
           }
           return animal;
       });
 
-      setAnimalList(updatedAnimalListLastFed);
-      localStorage.setItem('AnimalList', JSON.stringify(updatedAnimalListLastFed));
-
-      setNewIsFed(true)
-
-      const updatedAnimalListIsFed = animalList.map((animal) => {
-        if (animal.id.toString() === e.currentTarget.id) {
-            return { ...animal, isFed: newIsFed };
-        }
-        return animal;
-    });
-
-    setAnimalList(updatedAnimalListIsFed);
-      localStorage.setItem('AnimalList', JSON.stringify(updatedAnimalListIsFed));
+      setAnimalList(updatedAnimalListFeed);
+      localStorage.setItem('AnimalList', JSON.stringify(updatedAnimalListFeed));
 
   }
 
