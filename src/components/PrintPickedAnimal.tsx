@@ -3,6 +3,7 @@ import { useState } from "react";
 import { IAnimal } from "../models/IAnimal";
 import { useEffect } from "react";
 import { GetAnimalsFromLocalstorage } from "./GetAnimalFromLocalstorage";
+import { GetCurrentTime } from "./GetTimeToLastFed";
 
 export const PrintPickedAnimal = () => {
   
@@ -22,16 +23,12 @@ export const PrintPickedAnimal = () => {
   const [newFeedTime, setNewFeedTime] = useState<string>('');
 
   const handleFeedAnimal = (e: React.MouseEvent) => {
-      const today = new Date();
-      const hour = today.getHours();
-      const minutes = today.getMinutes();
-      const seconds = today.getSeconds();
-      const currentDate = `${hour}:${minutes}:${seconds}`;
-      setNewFeedTime(currentDate);
+      let currentTime = GetCurrentTime()
+      setNewFeedTime(currentTime);
 
       const updatedAnimalList = animalList.map((animal) => {
           if (animal.id.toString() === e.currentTarget.id) {
-              return { ...animal, lastFed: currentDate };
+              return { ...animal, lastFed: currentTime };
           }
           return animal;
       });
