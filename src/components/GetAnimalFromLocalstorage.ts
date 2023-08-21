@@ -8,8 +8,8 @@ export const GetAnimalsFromLocalstorage = () => {
 
     const [animalList, setAnimalList] = useState<IAnimal[]>([]);
 
-   useEffect(() => {
- 
+    const fetchData = async () => {
+ await GetAnimals();
    const storedAnimalList = localStorage.getItem('AnimalList')!
 
     if(storedAnimalList){
@@ -20,7 +20,12 @@ export const GetAnimalsFromLocalstorage = () => {
         console.log('inga djur')
        GetAnimals(); 
     }
-},[]) 
+    }
+
+    useEffect(() => {
+        fetchData();
+    },[]) 
+
 return animalList
 }
 
