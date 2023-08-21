@@ -1,6 +1,6 @@
 
 import { IAnimal } from "../models/IAnimal";
-import { GetAnimals } from "./GetAnimals";
+import { GetAnimals } from "../components/GetAnimals";
 
 
 export const GetAnimalsFromLocalstorage = async () => {
