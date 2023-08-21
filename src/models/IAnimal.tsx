@@ -8,6 +8,6 @@ export interface IAnimal{
     imageUrl: string,
     medicine: string,
     isFed: boolean,
-    lastFed: number
+    lastFed: string
 
 }
