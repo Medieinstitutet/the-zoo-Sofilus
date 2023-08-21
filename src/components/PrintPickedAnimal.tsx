@@ -2,7 +2,7 @@ import { GetPickedAnimal } from "./GetPickedAnimal";
 import { useState } from "react";
 import { IAnimal } from "../models/IAnimal";
 import { useEffect } from "react";
-import { GetAnimalsFromLocalstorage } from "./GetAnimalFromLocalstorage";
+import { GetAnimalsFromLocalstorage } from "../services/GetAnimalFromLocalstorage";
 import { GetCurrentTime } from "./GetTimeToLastFed";
 import { ReformLastFedTimeFromApi } from "./reformLastFedTimeFromApi";
 
@@ -22,20 +22,34 @@ export const PrintPickedAnimal = () => {
   },[]) 
 
   const [newFeedTime, setNewFeedTime] = useState<string>('');
+  const [newIsFed, setNewIsFed] = useState<boolean>(false)
 
   const handleFeedAnimal = (e: React.MouseEvent) => {
       let currentTime = GetCurrentTime()
       setNewFeedTime(currentTime);
 
-      const updatedAnimalList = animalList.map((animal) => {
+      const updatedAnimalListLastFed = animalList.map((animal) => {
           if (animal.id.toString() === e.currentTarget.id) {
               return { ...animal, lastFed: currentTime };
           }
           return animal;
       });
 
-      setAnimalList(updatedAnimalList);
-      localStorage.setItem('AnimalList', JSON.stringify(updatedAnimalList));
+      setAnimalList(updatedAnimalListLastFed);
+      localStorage.setItem('AnimalList', JSON.stringify(updatedAnimalListLastFed));
+
+      setNewIsFed(true)
+
+      const updatedAnimalListIsFed = animalList.map((animal) => {
+        if (animal.id.toString() === e.currentTarget.id) {
+            return { ...animal, isFed: newIsFed };
+        }
+        return animal;
+    });
+
+    setAnimalList(updatedAnimalListIsFed);
+      localStorage.setItem('AnimalList', JSON.stringify(updatedAnimalListIsFed));
+
   }
 
   let foundAnimal = GetPickedAnimal()
