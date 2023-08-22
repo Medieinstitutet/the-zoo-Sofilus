@@ -9,40 +9,92 @@ import { ReformLastFedTimeFromApi } from "./reformLastFedTimeFromApi";
 export const PrintPickedAnimal = () => {
   
   const [animalList, setAnimalList] = useState<IAnimal[]>([]);
-  
+  const [newFeedTime, setNewFeedTime] = useState<Date>(new Date());
+  const [isFed, setIsFed] = useState<boolean>(false);
+  //const timerFourHours = 4 * 60 * 60 * 1000;
+  //const timerFourHours = 5 * 1000;
+
   const fetchedData = async () =>{
   const animalListLocal = await GetAnimalsFromLocalstorage() 
     if(animalListLocal){
       setAnimalList(animalListLocal)
     }  
-  }
-  
+
+    let foundAnimal = GetPickedAnimal();
+    let currentDate = new Date();
+
+    if (foundAnimal?.lastFed) {
+        const lastFedTime = new Date(foundAnimal.lastFed);
+        setNewFeedTime(lastFedTime);
+        const dateDiff = (currentDate.getTime() - lastFedTime.getTime()) / 1000
+        if (dateDiff >= 5) {
+          setIsFed(false)
+        }
+
+      }
+    }
+
   useEffect(() => {
     fetchedData();
   },[]) 
 
-  const [newFeedTime, setNewFeedTime] = useState<string>('');
-  const [newIsFed, setNewIsFed] = useState<boolean>(false)
+  
 
   const handleFeedAnimal = (e: React.MouseEvent) => {
-      let currentTime = GetCurrentTime()
-      setNewFeedTime(currentTime);
-      setNewIsFed(true)
+    if (isFed) {
+      return;
+    }
+    let id = e.currentTarget.id
 
-      const updatedAnimalListFeed = animalList.map((animal) => {
-          if (animal.id.toString() === e.currentTarget.id) {
-              return { ...animal, lastFed: currentTime, isFed: newIsFed };
-          }
-          return animal;
-      });
+    let currentTime = GetCurrentTime()
 
-      setAnimalList(updatedAnimalListFeed);
-      localStorage.setItem('AnimalList', JSON.stringify(updatedAnimalListFeed));
+    setNewFeedTime(currentTime);
+    
+    const updatedAnimalListLastFed = animalList.map((animal) => {
+        if (animal.id.toString() === id) {
+          animal.lastFed = currentTime
+        }
+        return animal;
+    });
+
+    setAnimalList(updatedAnimalListLastFed);
+    localStorage.setItem('AnimalList', JSON.stringify(updatedAnimalListLastFed));
+
+    setIsFed(true);
+
+    const updatedAnimalListIsFedTrue = animalList.map((animal) => {
+      if (animal.id.toString() === id) {
+        animal.lastFed = currentTime
+      }
+     
+      return animal;
+  });
+
+    setAnimalList(updatedAnimalListIsFedTrue);
+    localStorage.setItem('AnimalList', JSON.stringify(updatedAnimalListIsFedTrue));
+
+    /*
+    setTimeout(() => {
+      setIsFed(false); // Ska byta tillbaka i localstorage
+      const updatedAnimalListIsFedFalse = animalList.map((animal) => {
+        if (animal.id.toString() === id) {
+            animal.isFed = false
+        }
+       
+        return animal;
+    });
+    
+    console.log(updatedAnimalListIsFedFalse)
+    setAnimalList(updatedAnimalListIsFedFalse);
+      localStorage.setItem('AnimalList', JSON.stringify(updatedAnimalListIsFedFalse));
+    }, timerFourHours);
+    */
 
   }
 
   let foundAnimal = GetPickedAnimal()
-  let formattedTime = ReformLastFedTimeFromApi();
+  //formattedTime = dateObject.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+  foundAnimal?.lastFed
 
   let htmlElements: JSX.Element | null = null;
   if (foundAnimal) {
@@ -52,8 +104,8 @@ export const PrintPickedAnimal = () => {
           <img src={foundAnimal.imageUrl} alt={foundAnimal.name} className="picked-animal-img"/>
           <p className="picked-animal-year-of-birth">Födelseår: {foundAnimal.yearOfBirth}</p>
           <p className="picked-animal-description">{foundAnimal.longDescription}</p>
-          <p className="picked-animal-last-fed"> Matades senast: {newFeedTime || formattedTime }</p>
-          <button className="picked-animal-feed-btn" onClick={handleFeedAnimal} id={foundAnimal.id.toString()}>Mata {foundAnimal.name}</button>
+          <p className="picked-animal-last-fed"> Matades senast: {newFeedTime.toString() || foundAnimal.lastFed }</p>
+          <button disabled={isFed} className="picked-animal-feed-btn" onClick={handleFeedAnimal} id={foundAnimal.id.toString()}>Mata {foundAnimal.name}</button>
       </div>
     );
   } else {
@@ -61,9 +113,10 @@ export const PrintPickedAnimal = () => {
   }
   
   return (
-      <>
           <div className="picked-animal-page">{htmlElements}</div>
-      </>
-  
   )
 }
+
+
+// Den ska inte uppdatera tiden varje gång sidan laddas om, varför gör den de?
+//Kolla så de funkar med att desparas i localstorage även när man går fram och tillbaka
