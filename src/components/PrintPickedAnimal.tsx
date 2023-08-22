@@ -14,19 +14,17 @@ export const PrintPickedAnimal = () => {
   const timerFourHours = 10 * 1000;
 
   const fetchedData = async () =>{
-
     const animalListLocal = await GetAnimalsFromLocalstorage() 
     if(animalListLocal){
       setAnimalList(animalListLocal)
     }  
-    }
+  }
 
   useEffect(() => {
-    
     fetchedData();
+
     if (foundAnimal?.lastFed) {
       setNewFeedTime(new Date(foundAnimal.lastFed));
-
       const currentTime = new Date();
       const lastFedTime = new Date(foundAnimal.lastFed);
       const timeSinceLastFed = currentTime.getTime() - lastFedTime.getTime();
@@ -39,20 +37,17 @@ export const PrintPickedAnimal = () => {
         }, timerFourHours - timeSinceLastFed);
       }
     }
-  }, [foundAnimal?.lastFed, timerFourHours])
 
-  useEffect(() => {
     const lastFedTime = new Date(foundAnimal?.lastFed || 0).getTime();
     localStorage.setItem('LastFedTime', lastFedTime.toString());
-  });
-   
+  }, [foundAnimal?.lastFed, timerFourHours])
 
   const handleFeedAnimal = (e: React.MouseEvent) => {
    const id = e.currentTarget.id
 
     if (!isFed) { 
       const currentTime = new Date();
-    setNewFeedTime(currentTime);
+      setNewFeedTime(currentTime);
 
       const updatedAnimalListFeed = animalList.map((animal) => {
         if (animal.id.toString() === id) {
@@ -64,20 +59,20 @@ export const PrintPickedAnimal = () => {
   
       setAnimalList(updatedAnimalListFeed);
       localStorage.setItem('AnimalList', JSON.stringify(updatedAnimalListFeed));
-     setIsFed(true);
+      setIsFed(true);
 
-    setTimeout(() => {
-      setIsFed(false);
-    }, timerFourHours)
+      setTimeout(() => {
+        setIsFed(false);
+      }, timerFourHours)
 
-    localStorage.setItem('LastFedTime', currentTime.getTime().toString());
-  }
+      localStorage.setItem('LastFedTime', currentTime.getTime().toString());
+    }
   }
   
   return (
     <>
       <HtmlPickedAnimal 
-      newFeedTime={newFeedTime}
+        newFeedTime={newFeedTime}
         isFed={isFed}
         handleFeedAnimal={handleFeedAnimal}></HtmlPickedAnimal>
     </>      
