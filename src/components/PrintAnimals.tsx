@@ -18,7 +18,7 @@ export const PrintAnimals = () => {
     },[]) 
 
     const goToAnimal = (e: React.MouseEvent) => {
-        let id = (e.currentTarget as HTMLButtonElement).id
+        const id = (e.currentTarget as HTMLButtonElement).id
         window.location.href = `http://localhost:5173/${id}`
     }
 
