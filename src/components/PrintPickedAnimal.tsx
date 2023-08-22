@@ -1,7 +1,6 @@
 import { GetPickedAnimal } from "./GetPickedAnimal";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { IAnimal } from "../models/IAnimal";
-import { useEffect } from "react";
 import { GetAnimalsFromLocalstorage } from "../services/GetAnimalFromLocalstorage";
 
 export const PrintPickedAnimal = () => {
@@ -11,27 +10,14 @@ export const PrintPickedAnimal = () => {
   const [isFed, setIsFed] = useState<boolean>(false);
    const foundAnimal = GetPickedAnimal()
   //const timerFourHours = 4 * 60 * 60 * 1000;
-  //const timerFourHours = 5 * 1000;
+  const timerFourHours = 10 * 1000;
 
   const fetchedData = async () =>{
-  const animalListLocal = await GetAnimalsFromLocalstorage() 
+
+    const animalListLocal = await GetAnimalsFromLocalstorage() 
     if(animalListLocal){
       setAnimalList(animalListLocal)
     }  
-    
-
-    // const foundAnimal = GetPickedAnimal();
-    // const currentDate = new Date();
-
-    // if (foundAnimal?.lastFed) {
-    //     const lastFedTime = new Date(foundAnimal.lastFed);
-    //     setNewFeedTime(lastFedTime);
-    //     const dateDiff = (currentDate.getTime() - lastFedTime.getTime()) / 1000
-    //     if (dateDiff >= 5) {
-    //       setIsFed(false)
-    //     }
-
-    //   }
     }
 
   useEffect(() => {
@@ -39,28 +25,38 @@ export const PrintPickedAnimal = () => {
     fetchedData();
     if (foundAnimal?.lastFed) {
       setNewFeedTime(new Date(foundAnimal.lastFed));
+
+      const currentTime = new Date();
+      const lastFedTime = new Date(foundAnimal.lastFed);
+      const timeSinceLastFed = currentTime.getTime() - lastFedTime.getTime();
+
+      if (timeSinceLastFed < timerFourHours) {
+        setIsFed(true);
+
+        setTimeout(() => {
+          setIsFed(false);
+        }, timerFourHours - timeSinceLastFed);
+      }
     }
-  }, [foundAnimal?.lastFed])
+  }, [foundAnimal?.lastFed, timerFourHours])
+
+  useEffect(() => {
+    const lastFedTime = new Date(foundAnimal?.lastFed || 0).getTime();
+    localStorage.setItem('LastFedTime', lastFedTime.toString());
+  });
    
 
-  
-
   const handleFeedAnimal = (e: React.MouseEvent) => {
-    // if (isFed) {
-    //   return;
-    // }
-    const id = e.currentTarget.id
+   const id = e.currentTarget.id
 
-    const currentTime = new Date();
-      
-    console.log(currentTime)
+   
+
+   
+
+    if (!isFed) { 
+      const currentTime = new Date();
     setNewFeedTime(currentTime);
-    console.log(newFeedTime.toString())
 
-
-    if (!isFed) {
-      setIsFed(true);
-  
       const updatedAnimalListFeed = animalList.map((animal) => {
         if (animal.id.toString() === id) {
           animal.lastFed = currentTime;
@@ -71,32 +67,15 @@ export const PrintPickedAnimal = () => {
   
       setAnimalList(updatedAnimalListFeed);
       localStorage.setItem('AnimalList', JSON.stringify(updatedAnimalListFeed));
-    }
+     setIsFed(true);
 
-    
-
-    /*
     setTimeout(() => {
-      setIsFed(false); // Ska byta tillbaka i localstorage
-      const updatedAnimalListIsFedFalse = animalList.map((animal) => {
-        if (animal.id.toString() === id) {
-            animal.isFed = false
-        }
-       
-        return animal;
-    });
-    
-    console.log(updatedAnimalListIsFedFalse)
-    setAnimalList(updatedAnimalListIsFedFalse);
-      localStorage.setItem('AnimalList', JSON.stringify(updatedAnimalListIsFedFalse));
-    }, timerFourHours);
-    */
+      setIsFed(false);
+    }, timerFourHours)
 
+    localStorage.setItem('LastFedTime', currentTime.getTime().toString());
   }
-
- 
-  //formattedTime = dateObject.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
-  foundAnimal?.lastFed
+  }
 
   let htmlElements: JSX.Element | null = null;
   if (foundAnimal) {
@@ -118,7 +97,3 @@ export const PrintPickedAnimal = () => {
           <div className="picked-animal-page">{htmlElements}</div>
   )
 }
-
-
-// Den ska inte uppdatera tiden varje gång sidan laddas om, varför gör den de?
-//Kolla så de funkar med att desparas i localstorage även när man går fram och
