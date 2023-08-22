@@ -1,7 +1,7 @@
 import { GetPickedAnimal } from "./GetPickedAnimal";
 import { useState, useEffect } from "react";
 import { IAnimal } from "../models/IAnimal";
-import { GetAnimalsFromLocalstorage } from "../services/GetAnimalFromLocalstorage";
+import { GetAnimalsFromLocalstorage } from "../services/GetAnimalFromLocalstorageService";
 
 export const PrintPickedAnimal = () => {
   
@@ -48,10 +48,6 @@ export const PrintPickedAnimal = () => {
 
   const handleFeedAnimal = (e: React.MouseEvent) => {
    const id = e.currentTarget.id
-
-   
-
-   
 
     if (!isFed) { 
       const currentTime = new Date();

@@ -1,4 +1,4 @@
-import { GetAnimalsFromLocalstorage } from "../services/GetAnimalFromLocalstorage"
+import { GetAnimalsFromLocalstorage } from "../services/GetAnimalFromLocalstorageService"
 import { useState, useEffect } from "react";
 import { IAnimal } from "../models/IAnimal";
 
