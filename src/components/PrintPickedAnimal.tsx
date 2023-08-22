@@ -56,70 +56,24 @@ export const PrintPickedAnimal = () => {
     console.log(currentTime)
     setNewFeedTime(currentTime);
     console.log(newFeedTime.toString())
-    
-    const updatedAnimalListLastFed = animalList.map((animal) => {
+
+
+    if (!isFed) {
+      setIsFed(true);
+  
+      const updatedAnimalListFeed = animalList.map((animal) => {
         if (animal.id.toString() === id) {
-          animal.lastFed = currentTime
+          animal.lastFed = currentTime;
+          animal.isFed = true;
         }
         return animal;
-    });
+      });
+  
+      setAnimalList(updatedAnimalListFeed);
+      localStorage.setItem('AnimalList', JSON.stringify(updatedAnimalListFeed));
+    }
 
-    setAnimalList(updatedAnimalListLastFed);
-    console.log(updatedAnimalListLastFed)
-    localStorage.setItem('AnimalList', JSON.stringify(updatedAnimalListLastFed));
-
-
-
-
-
-
-
-
-console.log(newFeedTime)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    setIsFed(true);
-
-    const updatedAnimalListIsFedTrue = animalList.map((animal) => {
-      if (animal.id.toString() === id) {
-        animal.lastFed = currentTime
-      }
-     
-      return animal;
-  });
-
-    setAnimalList(updatedAnimalListIsFedTrue);
-    localStorage.setItem('AnimalList', JSON.stringify(updatedAnimalListIsFedTrue));
+    
 
     /*
     setTimeout(() => {
