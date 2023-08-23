@@ -41,7 +41,7 @@ export const PrintAnimals = () => {
             <img src={animal.imageUrl} className="animal-card-img" alt={animal.name} onError={HandleImageError} />
             <p className="animal-card-name">{animal.name}</p>
             <p className="animal-card-description">{animal.shortDescription}</p>
-            <button id={animal.id.toString()} onClick={goToAnimal} >Besök djuret</button>
+            <button id={animal.id.toString()} onClick={goToAnimal} className="animal-card-btn" >Besök djuret</button>
         </div>
     ));
 
