@@ -18,13 +18,15 @@ export const HtmlPickedAnimal = ({newFeedTime, activButton, handleFeedAnimal}: I
       hour12:false,
     });
 
+    const formattedFeedTimeWithoutCommas = formattedFeedTime.split(',').join('');
+
     htmlElements = (
       <div key={foundAnimal.id} className="picked-animal-container">
           <h1 className="picked-animal-name">{foundAnimal.name}</h1>
           <img src={foundAnimal.imageUrl} alt={foundAnimal.name} className="picked-animal-img" onError={HandleImageError}/>
           <p className="picked-animal-year-of-birth">Födelseår: {foundAnimal.yearOfBirth}</p>
           <p className="picked-animal-description">{foundAnimal.longDescription}</p>
-          <p className="picked-animal-last-fed"> Matades senast: {formattedFeedTime }</p>
+          <p className="picked-animal-last-fed"> Matades senast: {formattedFeedTimeWithoutCommas}</p>
           <p className="picked-animal-is-hungry">{foundAnimal.name} är {activButton ? 'mätt :)' : 'hungrig!'}</p>
           <button disabled={activButton} className="picked-animal-feed-btn" onClick={handleFeedAnimal} id={foundAnimal.id.toString()}>Mata {foundAnimal.name}</button>
       </div>
