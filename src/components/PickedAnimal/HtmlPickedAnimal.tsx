@@ -14,7 +14,7 @@ export const HtmlPickedAnimal = ({newFeedTime, activButton, handleFeedAnimal}: I
           <p className="picked-animal-year-of-birth">Födelseår: {foundAnimal.yearOfBirth}</p>
           <p className="picked-animal-description">{foundAnimal.longDescription}</p>
           <p className="picked-animal-last-fed"> Matades senast: {newFeedTime.toString() }</p>
-          <p>{foundAnimal.name} är {activButton ? 'mätt' : 'hungrig'}</p>
+          <p className="picked-animal-is-hungry">{foundAnimal.name} är {activButton ? 'mätt :)' : 'hungrig!'}</p>
           <button disabled={activButton} className="picked-animal-feed-btn" onClick={handleFeedAnimal} id={foundAnimal.id.toString()}>Mata {foundAnimal.name}</button>
       </div>
     );
