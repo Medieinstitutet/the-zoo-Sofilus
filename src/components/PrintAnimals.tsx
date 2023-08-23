@@ -15,6 +15,7 @@ export const PrintAnimals = () => {
     
     useEffect(() => {
         fetchedData();
+        
     },[]) 
 
     const goToAnimal = (e: React.MouseEvent) => {
@@ -23,7 +24,7 @@ export const PrintAnimals = () => {
     }
 
     const animalElements: JSX.Element[] = animalList.map((animal) => (
-        <div  key={animal.id} className="animal-card-container">
+        <div  key={animal.id} className={`animal-card-container ${animal.isFed ? '' : 'hungry'}`}>
             <img src={animal.imageUrl} className="animal-card-img" alt={animal.name} />
             <p className="animal-card-name">{animal.name}</p>
             <p className="animal-card-description">{animal.shortDescription}</p>
