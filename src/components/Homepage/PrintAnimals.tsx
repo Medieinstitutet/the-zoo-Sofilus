@@ -1,6 +1,7 @@
 import { GetAnimalsFromLocalstorage } from "../../services/GetAnimalFromLocalstorageService"
 import { useState, useEffect } from "react";
 import { IAnimal } from "../../models/IAnimal";
+import { HandleImageError } from "../../services/handleImageError";
 
 export const PrintAnimals = () => {
 
@@ -29,12 +30,6 @@ export const PrintAnimals = () => {
         }); 
     }) 
 
-    const handleImageError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
-       
-        const imageElement = e.currentTarget;
-        imageElement.src = '/src/assets/david-pupaza-heNwUmEtZzo-unsplash.jpg';
-        imageElement.alt = 'Bild kunde inte laddas';
-    };
 
     const goToAnimal = (e: React.MouseEvent) => {
         const id = (e.currentTarget as HTMLButtonElement).id
@@ -43,7 +38,7 @@ export const PrintAnimals = () => {
 
     const animalElements: JSX.Element[] = animalList.map((animal) => (
         <div  key={animal.id} className={`animal-card-container ${((new Date()).getTime() - (new Date(animal.lastFed)).getTime()) < timerFourHours  ? '' : 'hungry'}`}>
-            <img src={animal.imageUrl} className="animal-card-img" alt={animal.name} onError={handleImageError} />
+            <img src={animal.imageUrl} className="animal-card-img" alt={animal.name} onError={HandleImageError} />
             <p className="animal-card-name">{animal.name}</p>
             <p className="animal-card-description">{animal.shortDescription}</p>
             <button id={animal.id.toString()} onClick={goToAnimal} >Besök djuret</button>
