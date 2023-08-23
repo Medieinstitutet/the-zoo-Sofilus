@@ -27,5 +27,7 @@ export const HtmlPickedAnimal = ({newFeedTime, isFed, handleFeedAnimal}: IAnimai
     
     return (
              <div className="picked-animal-page">{htmlElements}</div>
+
+             // Nästa steg är att det ska stå att djuret är matat när man klickat på knappen.
     )
   }
