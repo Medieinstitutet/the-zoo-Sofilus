@@ -1,6 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
-import { Home } from "./components/Home";
-import { PickedAnimalPage } from "./components/PickedAnimalPage";
+import { Home } from "./components/Homepage/Home";
+import { PickedAnimalPage } from "./components/PickedAnimal/PickedAnimalPage";
 
 export const router = createBrowserRouter([
     {

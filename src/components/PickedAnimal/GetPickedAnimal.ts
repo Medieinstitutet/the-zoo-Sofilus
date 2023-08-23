@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { IAnimal } from "../models/IAnimal";
-import { GetAnimalsFromLocalstorage } from "../services/GetAnimalFromLocalstorageService";
+import { IAnimal } from "../../models/IAnimal";
+import { GetAnimalsFromLocalstorage } from "../../services/GetAnimalFromLocalstorageService";
 
 
 export const GetPickedAnimal = () => {

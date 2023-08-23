@@ -1,7 +1,7 @@
 import { GetPickedAnimal } from "./GetPickedAnimal";
 import { useState, useEffect } from "react";
-import { IAnimal } from "../models/IAnimal";
-import { GetAnimalsFromLocalstorage } from "../services/GetAnimalFromLocalstorageService";
+import { IAnimal } from "../../models/IAnimal";
+import { GetAnimalsFromLocalstorage } from "../../services/GetAnimalFromLocalstorageService";
 import { HtmlPickedAnimal } from "./HtmlPickedAnimal";
 
 export const PrintPickedAnimal = () => {

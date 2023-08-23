@@ -1,6 +1,6 @@
-import { GetAnimalsFromLocalstorage } from "../services/GetAnimalFromLocalstorageService"
+import { GetAnimalsFromLocalstorage } from "../../services/GetAnimalFromLocalstorageService"
 import { useState, useEffect } from "react";
-import { IAnimal } from "../models/IAnimal";
+import { IAnimal } from "../../models/IAnimal";
 
 export const PrintAnimals = () => {
 
