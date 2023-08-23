@@ -6,8 +6,8 @@ import { HandleImageError } from "../../services/handleImageError";
 export const PrintAnimals = () => {
 
     const [animalList, setAnimalList] = useState<IAnimal[]>([]);
-    //const timerFourHours = 4 * 60 * 60 * 1000;
-    const timerFourHours = 20 * 1000;
+    const timerFourHours = 4 * 60 * 60 * 1000;
+    //const timerFourHours = 20 * 1000;
 
     const fetchedData = async () =>{
         const animalListLocal = await GetAnimalsFromLocalstorage() 

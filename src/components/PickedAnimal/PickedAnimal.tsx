@@ -10,8 +10,8 @@ export const PickedAnimal = () => {
   const [activeBtn, setActiveBtn] = useState<boolean>(false);
   const foundAnimal = GetPickedAnimal()
   let id = "";
-  //const timerThreeHours = 3 * 60 * 60 * 1000;
-  const timerThreeHours = 10 * 1000;
+  const timerThreeHours = 3 * 60 * 60 * 1000;
+  // const timerThreeHours = 10 * 1000;
   
   const saveDataFromLocalstorageInAnimalListState = async () =>{
     const animalListLocal = await GetAnimalsFromLocalstorage() 
