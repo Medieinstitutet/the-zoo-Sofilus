@@ -11,7 +11,7 @@ export const PrintPickedAnimal = () => {
   const [isFed, setIsFed] = useState<boolean>(false);
    const foundAnimal = GetPickedAnimal()
   //const timerFourHours = 4 * 60 * 60 * 1000;
-  const timerFourHours = 10 * 1000;
+  const timerThreeHours = 10 * 1000;
 
   const fetchedData = async () =>{
     const animalListLocal = await GetAnimalsFromLocalstorage() 
@@ -29,18 +29,18 @@ export const PrintPickedAnimal = () => {
       const lastFedTime = new Date(foundAnimal.lastFed);
       const timeSinceLastFed = currentTime.getTime() - lastFedTime.getTime();
 
-      if (timeSinceLastFed < timerFourHours) {
+      if (timeSinceLastFed < timerThreeHours) {
         setIsFed(true);
 
         setTimeout(() => {
           setIsFed(false);
-        }, timerFourHours - timeSinceLastFed);
+        }, timerThreeHours - timeSinceLastFed);
       }
     }
 
     const lastFedTime = new Date(foundAnimal?.lastFed || 0).getTime();
     localStorage.setItem('LastFedTime', lastFedTime.toString());
-  }, [foundAnimal?.lastFed, timerFourHours])
+  }, [foundAnimal?.lastFed, timerThreeHours])
 
   const handleFeedAnimal = (e: React.MouseEvent) => {
    const id = e.currentTarget.id
@@ -63,7 +63,7 @@ export const PrintPickedAnimal = () => {
 
       setTimeout(() => {
         setIsFed(false);
-      }, timerFourHours)
+      }, timerThreeHours)
 
       localStorage.setItem('LastFedTime', currentTime.getTime().toString());
     }
