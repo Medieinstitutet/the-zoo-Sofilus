@@ -5,11 +5,18 @@ export const HtmlPickedAnimal = ({newFeedTime, activButton, handleFeedAnimal}: I
   const foundAnimal = GetPickedAnimal()
   let htmlElements: JSX.Element | null = null;
 
+  const handleImageError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
+       
+    const imageElement = e.currentTarget;
+    imageElement.src = '/src/assets/david-pupaza-heNwUmEtZzo-unsplash.jpg';
+    imageElement.alt = 'Bild kunde inte laddas';
+};
+
   if (foundAnimal) {
     htmlElements = (
       <div key={foundAnimal.id} className="picked-animal-container">
           <h1 className="picked-animal-name">{foundAnimal.name}</h1>
-          <img src={foundAnimal.imageUrl} alt={foundAnimal.name} className="picked-animal-img"/>
+          <img src={foundAnimal.imageUrl} alt={foundAnimal.name} className="picked-animal-img" onError={handleImageError}/>
           <p className="picked-animal-year-of-birth">Födelseår: {foundAnimal.yearOfBirth}</p>
           <p className="picked-animal-description">{foundAnimal.longDescription}</p>
           <p className="picked-animal-last-fed"> Matades senast: {newFeedTime.toString() }</p>
