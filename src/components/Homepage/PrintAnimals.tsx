@@ -29,14 +29,21 @@ export const PrintAnimals = () => {
         }); 
     }) 
 
+    const handleImageError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
+       
+        const imageElement = e.currentTarget;
+        imageElement.src = '/src/assets/david-pupaza-heNwUmEtZzo-unsplash.jpg';
+        imageElement.alt = 'Bild kunde inte laddas';
+    };
+
     const goToAnimal = (e: React.MouseEvent) => {
         const id = (e.currentTarget as HTMLButtonElement).id
         window.location.href = `http://localhost:5173/${id}`
     }
-    
+
     const animalElements: JSX.Element[] = animalList.map((animal) => (
         <div  key={animal.id} className={`animal-card-container ${((new Date()).getTime() - (new Date(animal.lastFed)).getTime()) < timerFourHours  ? '' : 'hungry'}`}>
-            <img src={animal.imageUrl} className="animal-card-img" alt={animal.name} />
+            <img src={animal.imageUrl} className="animal-card-img" alt={animal.name} onError={handleImageError} />
             <p className="animal-card-name">{animal.name}</p>
             <p className="animal-card-description">{animal.shortDescription}</p>
             <button id={animal.id.toString()} onClick={goToAnimal} >Besök djuret</button>
