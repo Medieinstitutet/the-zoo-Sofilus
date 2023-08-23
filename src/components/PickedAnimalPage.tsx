@@ -1,5 +1,5 @@
 import { Header } from "./Header"
-import { PrintPickedAnimal } from "./PrintPickedAnimal"
+import { PrintPickedAnimal } from "./PickedAnimal"
 
 export const PickedAnimalPage = () => {
     return (
