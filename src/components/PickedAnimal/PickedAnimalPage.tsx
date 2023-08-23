@@ -7,6 +7,5 @@ export const PickedAnimalPage = () => {
             <Header></Header>
             <PrintPickedAnimal></PrintPickedAnimal>
         </>
-    
     )
 }
