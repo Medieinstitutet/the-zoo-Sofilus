@@ -1,5 +1,6 @@
 import { GetPickedAnimal } from "./GetPickedAnimal";
 import { IAnimailDetailsProps } from "../../models/IAnimalDetailsProps";
+import { HandleImageError } from "../../services/handleImageError";
 
 export const HtmlPickedAnimal = ({newFeedTime, activButton, handleFeedAnimal}: IAnimailDetailsProps) => {
   const foundAnimal = GetPickedAnimal()
@@ -9,7 +10,7 @@ export const HtmlPickedAnimal = ({newFeedTime, activButton, handleFeedAnimal}: I
     htmlElements = (
       <div key={foundAnimal.id} className="picked-animal-container">
           <h1 className="picked-animal-name">{foundAnimal.name}</h1>
-          <img src={foundAnimal.imageUrl} alt={foundAnimal.name} className="picked-animal-img"/>
+          <img src={foundAnimal.imageUrl} alt={foundAnimal.name} className="picked-animal-img" onError={HandleImageError}/>
           <p className="picked-animal-year-of-birth">Födelseår: {foundAnimal.yearOfBirth}</p>
           <p className="picked-animal-description">{foundAnimal.longDescription}</p>
           <p className="picked-animal-last-fed"> Matades senast: {newFeedTime.toString() }</p>
@@ -25,3 +26,5 @@ export const HtmlPickedAnimal = ({newFeedTime, activButton, handleFeedAnimal}: I
     <div className="picked-animal-page">{htmlElements}</div>
   )
 }
+
+
