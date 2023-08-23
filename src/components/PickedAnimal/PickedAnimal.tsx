@@ -16,7 +16,7 @@ export const PickedAnimal = () => {
   const timerThreeHours = 10 * 1000;
   
 
-  const fetchedData = async () =>{
+  const saveDataFromLocalstorageInAnimalListState = async () =>{
     const animalListLocal = await GetAnimalsFromLocalstorage() 
     if(animalListLocal){
       setAnimalList(animalListLocal)
@@ -24,7 +24,7 @@ export const PickedAnimal = () => {
   }
 
   useEffect(() => {
-    fetchedData();
+    saveDataFromLocalstorageInAnimalListState();
 
     const currentTime = new Date(); 
    
