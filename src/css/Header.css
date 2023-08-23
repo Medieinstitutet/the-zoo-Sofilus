@@ -3,15 +3,17 @@
 .header-container{
   width: 100vw;
   height: 200px;
-  background-color: rgb(120, 169, 120);
   display: flex;
   justify-content: space-around;
   align-items: center;
+  margin: 0 auto;
+  width: 1000px;
 }
 
 .headline{
-  font-size: 3rem;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 4rem;
+  font-family:serif;
   font-style: italic;
+  color: rgba(255, 255, 255, 0.92);
 }
 
