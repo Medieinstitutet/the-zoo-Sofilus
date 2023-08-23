@@ -8,9 +8,10 @@ export const PrintPickedAnimal = () => {
   
   const [animalList, setAnimalList] = useState<IAnimal[]>([]);
   const [newFeedTime, setNewFeedTime] = useState<Date>(new Date());
-  const [isFed, setIsFed] = useState<boolean>(false);
+  const [activeBtn, setActiveBtn] = useState<boolean>(false);
    const foundAnimal = GetPickedAnimal()
-  //const timerFourHours = 4 * 60 * 60 * 1000;
+   let id = "";
+  //const timerFourHours = 3 * 60 * 60 * 1000;
   const timerThreeHours = 10 * 1000;
 
   const fetchedData = async () =>{
@@ -23,58 +24,53 @@ export const PrintPickedAnimal = () => {
   useEffect(() => {
     fetchedData();
 
+    const currentTime = new Date(); 
+   
     if (foundAnimal?.lastFed) {
-      setNewFeedTime(new Date(foundAnimal.lastFed));
-      const currentTime = new Date();
       const lastFedTime = new Date(foundAnimal.lastFed);
+      setNewFeedTime(lastFedTime);
+      
       const timeSinceLastFed = currentTime.getTime() - lastFedTime.getTime();
 
       if (timeSinceLastFed < timerThreeHours) {
-        setIsFed(true);
+        setActiveBtn(true);
 
         setTimeout(() => {
-          setIsFed(false);
+          setActiveBtn(false);
         }, timerThreeHours - timeSinceLastFed);
       }
     }
-
-    const lastFedTime = new Date(foundAnimal?.lastFed || 0).getTime();
-    localStorage.setItem('LastFedTime', lastFedTime.toString());
   }, [foundAnimal?.lastFed, timerThreeHours])
 
   const handleFeedAnimal = (e: React.MouseEvent) => {
-   const id = e.currentTarget.id
+    id = e.currentTarget.id
+    
+    const currentTime = new Date();
+    setNewFeedTime(currentTime);
 
-    if (!isFed) { 
-      const currentTime = new Date();
-      setNewFeedTime(currentTime);
+    const updatedAnimalFed = animalList.map((animal) => {
+      if (animal.id.toString() === id) {
+        animal.lastFed = currentTime;
+      }
+      return animal;
+    });
 
-      const updatedAnimalListFeed = animalList.map((animal) => {
-        if (animal.id.toString() === id) {
-          animal.lastFed = currentTime;
-          animal.isFed = true;
-        }
-        return animal;
-      });
-  
-      setAnimalList(updatedAnimalListFeed);
-      localStorage.setItem('AnimalList', JSON.stringify(updatedAnimalListFeed));
-      setIsFed(true);
+    setAnimalList(updatedAnimalFed);
+    localStorage.setItem('AnimalList', JSON.stringify(updatedAnimalFed));
+    setActiveBtn(true);
 
-      setTimeout(() => {
-        setIsFed(false);
-      }, timerThreeHours)
-
-      localStorage.setItem('LastFedTime', currentTime.getTime().toString());
-    }
-  }
+    setTimeout(() => {
+      setActiveBtn(false);
+    }, timerThreeHours)
+}
   
   return (
     <>
       <HtmlPickedAnimal 
         newFeedTime={newFeedTime}
-        isFed={isFed}
-        handleFeedAnimal={handleFeedAnimal}></HtmlPickedAnimal>
+        isFed={activeBtn}
+        handleFeedAnimal={handleFeedAnimal}
+        ></HtmlPickedAnimal>
     </>      
   )
 }
