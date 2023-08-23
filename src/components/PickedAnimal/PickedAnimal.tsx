@@ -1,22 +1,19 @@
 import { GetPickedAnimal } from "./GetPickedAnimal";
 import { useState, useEffect } from "react";
-import { IAnimal } from "../models/IAnimal";
-import { GetAnimalsFromLocalstorage } from "../services/GetAnimalFromLocalstorageService";
+import { IAnimal } from "../../models/IAnimal";
+import { GetAnimalsFromLocalstorage } from "../../services/GetAnimalFromLocalstorageService";
 import { HtmlPickedAnimal } from "./HtmlPickedAnimal";
 
-export const PrintPickedAnimal = () => {
-  
+export const PickedAnimal = () => {
   const [animalList, setAnimalList] = useState<IAnimal[]>([]);
   const [newFeedTime, setNewFeedTime] = useState<Date>(new Date());
   const [activeBtn, setActiveBtn] = useState<boolean>(false);
-
-   const foundAnimal = GetPickedAnimal()
-   let id = "";
+  const foundAnimal = GetPickedAnimal()
+  let id = "";
   //const timerThreeHours = 3 * 60 * 60 * 1000;
   const timerThreeHours = 10 * 1000;
   
-
-  const fetchedData = async () =>{
+  const saveDataFromLocalstorageInAnimalListState = async () =>{
     const animalListLocal = await GetAnimalsFromLocalstorage() 
     if(animalListLocal){
       setAnimalList(animalListLocal)
@@ -24,8 +21,7 @@ export const PrintPickedAnimal = () => {
   }
 
   useEffect(() => {
-    fetchedData();
-
+    saveDataFromLocalstorageInAnimalListState();
     const currentTime = new Date(); 
    
     if (foundAnimal?.lastFed) {
@@ -41,13 +37,11 @@ export const PrintPickedAnimal = () => {
           setActiveBtn(false);
         }, timerThreeHours - timeSinceLastFed);
       }
-
     }
   }, [foundAnimal?.lastFed, timerThreeHours])
 
   const handleFeedAnimal = (e: React.MouseEvent) => {
     id = e.currentTarget.id
-    
     const currentTime = new Date();
     setNewFeedTime(currentTime);
 
@@ -65,7 +59,7 @@ export const PrintPickedAnimal = () => {
     setTimeout(() => {
       setActiveBtn(false);
     }, timerThreeHours)
-}
+  }
   
   return (
     <>

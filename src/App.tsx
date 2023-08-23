@@ -7,8 +7,6 @@ import './css/PickedAnimal.css'
 import { router } from './Router'
 
 function App() {
-
-
   return (
     <>
     <RouterProvider router={router}></RouterProvider>

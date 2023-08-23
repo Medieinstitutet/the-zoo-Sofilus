@@ -9,5 +9,4 @@ export interface IAnimal{
     medicine: string,
     isFed: boolean,
     lastFed: Date
-
 }

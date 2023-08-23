@@ -1,4 +1,4 @@
-import { Header } from "./Header"
+import { Header } from "../Header/Header"
 import { PrintAnimals } from "./PrintAnimals"
 
 export const Home = () => {
@@ -7,6 +7,5 @@ export const Home = () => {
             <Header></Header>
             <PrintAnimals></PrintAnimals>
         </>
-    
     )
 }
