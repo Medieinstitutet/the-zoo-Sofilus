@@ -2,11 +2,11 @@ import { GetPickedAnimal } from "./GetPickedAnimal";
 
 interface IAnimailDetailsProps {
     newFeedTime: Date;
-    isFed: boolean;
+    activButton: boolean;
     handleFeedAnimal: (e: React.MouseEvent) => void;
 }
 
-export const HtmlPickedAnimal = ({newFeedTime, isFed, handleFeedAnimal}: IAnimailDetailsProps) => {
+export const HtmlPickedAnimal = ({newFeedTime, activButton, handleFeedAnimal}: IAnimailDetailsProps) => {
   
     const foundAnimal = GetPickedAnimal()
     let htmlElements: JSX.Element | null = null;
@@ -19,8 +19,8 @@ export const HtmlPickedAnimal = ({newFeedTime, isFed, handleFeedAnimal}: IAnimai
             <p className="picked-animal-year-of-birth">Födelseår: {foundAnimal.yearOfBirth}</p>
             <p className="picked-animal-description">{foundAnimal.longDescription}</p>
             <p className="picked-animal-last-fed"> Matades senast: {newFeedTime.toString() }</p>
-            <p>{foundAnimal.name} är {isFed ? 'mätt' : 'hungrig'}</p>
-            <button disabled={isFed} className="picked-animal-feed-btn" onClick={handleFeedAnimal} id={foundAnimal.id.toString()}>Mata {foundAnimal.name}</button>
+            <p>{foundAnimal.name} är {activButton ? 'mätt' : 'hungrig'}</p>
+            <button disabled={activButton} className="picked-animal-feed-btn" onClick={handleFeedAnimal} id={foundAnimal.id.toString()}>Mata {foundAnimal.name}</button>
         </div>
       );
     } else {

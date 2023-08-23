@@ -9,10 +9,12 @@ export const PrintPickedAnimal = () => {
   const [animalList, setAnimalList] = useState<IAnimal[]>([]);
   const [newFeedTime, setNewFeedTime] = useState<Date>(new Date());
   const [activeBtn, setActiveBtn] = useState<boolean>(false);
+
    const foundAnimal = GetPickedAnimal()
    let id = "";
   //const timerThreeHours = 3 * 60 * 60 * 1000;
   const timerThreeHours = 10 * 1000;
+  
 
   const fetchedData = async () =>{
     const animalListLocal = await GetAnimalsFromLocalstorage() 
@@ -39,6 +41,7 @@ export const PrintPickedAnimal = () => {
           setActiveBtn(false);
         }, timerThreeHours - timeSinceLastFed);
       }
+
     }
   }, [foundAnimal?.lastFed, timerThreeHours])
 
@@ -68,7 +71,7 @@ export const PrintPickedAnimal = () => {
     <>
       <HtmlPickedAnimal 
         newFeedTime={newFeedTime}
-        isFed={activeBtn}
+        activButton={activeBtn}
         handleFeedAnimal={handleFeedAnimal}
         ></HtmlPickedAnimal>
     </>      
