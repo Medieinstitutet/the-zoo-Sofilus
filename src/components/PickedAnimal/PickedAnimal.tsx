@@ -4,7 +4,7 @@ import { IAnimal } from "../../models/IAnimal";
 import { GetAnimalsFromLocalstorage } from "../../services/GetAnimalFromLocalstorageService";
 import { HtmlPickedAnimal } from "./HtmlPickedAnimal";
 
-export const PrintPickedAnimal = () => {
+export const PickedAnimal = () => {
   
   const [animalList, setAnimalList] = useState<IAnimal[]>([]);
   const [newFeedTime, setNewFeedTime] = useState<Date>(new Date());

@@ -1,11 +1,11 @@
 import { Header } from "../Header/Header"
-import { PrintPickedAnimal } from "./PickedAnimal"
+import { PickedAnimal } from "./PickedAnimal"
 
 export const PickedAnimalPage = () => {
     return (
         <>
             <Header></Header>
-            <PrintPickedAnimal></PrintPickedAnimal>
+            <PickedAnimal></PickedAnimal>
         </>
     )
 }
