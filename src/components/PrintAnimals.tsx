@@ -27,7 +27,7 @@ export const PrintAnimals = () => {
             return animal;
           });
         
-    },[]) 
+    }) 
 
     const goToAnimal = (e: React.MouseEvent) => {
         const id = (e.currentTarget as HTMLButtonElement).id
