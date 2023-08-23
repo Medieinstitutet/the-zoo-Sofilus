@@ -5,7 +5,8 @@ import { IAnimal } from "../models/IAnimal";
 export const PrintAnimals = () => {
 
     const [animalList, setAnimalList] = useState<IAnimal[]>([]);
-    const timerThreeHours = 10 * 1000;
+    //const timerFourHours = 4 * 60 * 60 * 1000;
+    const timerFourHours = 20 * 1000;
 
     const fetchedData = async () =>{
         const animalListLocal = await GetAnimalsFromLocalstorage() 
@@ -18,7 +19,7 @@ export const PrintAnimals = () => {
         fetchedData();
 
         animalList.map((animal) => {
-            if (((new Date()).getTime() - (new Date(animal.lastFed)).getTime()) < timerThreeHours) {
+            if (((new Date()).getTime() - (new Date(animal.lastFed)).getTime()) < timerFourHours) {
                animal.isFed = false;
             } else {
                 animal.isFed = true;
@@ -37,7 +38,7 @@ export const PrintAnimals = () => {
   
 
     const animalElements: JSX.Element[] = animalList.map((animal) => (
-        <div  key={animal.id} className={`animal-card-container ${((new Date()).getTime() - (new Date(animal.lastFed)).getTime()) < timerThreeHours  ? '' : 'hungry'}`}>
+        <div  key={animal.id} className={`animal-card-container ${((new Date()).getTime() - (new Date(animal.lastFed)).getTime()) < timerFourHours  ? '' : 'hungry'}`}>
             <img src={animal.imageUrl} className="animal-card-img" alt={animal.name} />
             <p className="animal-card-name">{animal.name}</p>
             <p className="animal-card-description">{animal.shortDescription}</p>
