@@ -10,6 +10,7 @@ export const HtmlPickedAnimal = ({newFeedTime, isFed, handleFeedAnimal}: IAnimai
   
     const foundAnimal = GetPickedAnimal()
     let htmlElements: JSX.Element | null = null;
+
     if (foundAnimal) {
      htmlElements = (
         <div key={foundAnimal.id} className="picked-animal-container">
@@ -18,6 +19,7 @@ export const HtmlPickedAnimal = ({newFeedTime, isFed, handleFeedAnimal}: IAnimai
             <p className="picked-animal-year-of-birth">Födelseår: {foundAnimal.yearOfBirth}</p>
             <p className="picked-animal-description">{foundAnimal.longDescription}</p>
             <p className="picked-animal-last-fed"> Matades senast: {newFeedTime.toString() }</p>
+            <p>{foundAnimal.name} är {isFed ? 'mätt' : 'hungrig'}</p>
             <button disabled={isFed} className="picked-animal-feed-btn" onClick={handleFeedAnimal} id={foundAnimal.id.toString()}>Mata {foundAnimal.name}</button>
         </div>
       );
