@@ -7,6 +7,5 @@ export const Home = () => {
             <Header></Header>
             <PrintAnimals></PrintAnimals>
         </>
-    
     )
 }

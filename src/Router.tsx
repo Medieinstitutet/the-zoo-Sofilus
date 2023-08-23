@@ -11,5 +11,4 @@ export const router = createBrowserRouter([
         path:"/:id",
         element: <PickedAnimalPage></PickedAnimalPage>
     }
-
 ])

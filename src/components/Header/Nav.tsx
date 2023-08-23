@@ -1,4 +1,3 @@
-
 export const Nav = () => {
 
     const goToHomepage = () =>{
